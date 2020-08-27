@@ -38,6 +38,6 @@
     "unit-test": "./node_modules/mocha/bin/mocha test/unit"
   },
   "engines": {
-    "node": ">=6"
+    "node": ">=10"
   }
 }
