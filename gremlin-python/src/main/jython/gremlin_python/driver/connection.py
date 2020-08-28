@@ -66,6 +66,7 @@ class Connection:
                 f.result()
             except Exception as e:
                 future.set_exception(e)
+                self._inited = False
                 self._pool.put_nowait(self)
             else:
                 # Start receive task
@@ -83,5 +84,8 @@ class Connection:
                 status_code = self._protocol.data_received(data, self._results)
                 if status_code != 206:
                     break
+        except Exception as e:
+            self._inited = False
+            raise e
         finally:
             self._pool.put_nowait(self)
